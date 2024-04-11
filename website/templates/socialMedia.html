@@ -2,65 +2,56 @@
 {% block title %}Social Media{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="posts">
-            <!-- New post form -->
-            <form id="postForm" method="POST">
-                <textarea id="caption" placeholder="Write something..." class="form-control" rows="4" cols="50"></textarea><br>
-                <button type="submit" class="btn btn-primary">Post</button>
-            </form>
-            
-            <!-- Existing posts -->
-            {% for post in posts %}
-                <div class="post">
-                    <div class="post-header">
-                        <span>{{ post.user.first_name }}</span>
-                    </div>
-                    <div class="post-caption">{{ post.caption }}</div>
-                    <div class="post-comments" style="display: none;">
-                        <ul>
-                            {% for comment in post.comments %}
-                                <li><strong>{{ comment.user.first_name }}</strong>: {{ comment.comment }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <button class="see-comments">See Comments</button>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: auto;
+            padding: 20px;
         }
 
         .posts {
-            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
 
         .post {
-            border: 1px solid #ddd;
-            margin-bottom: 20px;
             background-color: #fff;
-            border-radius: 5px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .post:hover {
+            transform: translateY(-5px);
         }
 
         .post-header {
-            padding: 10px;
             display: flex;
             align-items: center;
         }
 
-        .post-header img {
-            width: 30px;
-            height: 30px;
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            background-color: #ccc; /* Placeholder color */
             border-radius: 50%;
             margin-right: 10px;
         }
 
+        .post-header span {
+            font-weight: bold;
+        }
+
         .post-caption {
             padding: 10px;
+            word-wrap: break-word;
         }
 
         .post-comments {
@@ -95,25 +86,61 @@
             color: #fff;
             border: none;
             border-radius: 5px;
+            padding: 5px 10px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         #postForm button:hover {
             background-color: #3578e5;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const seeButtons = document.querySelectorAll(".see-comments");
-    
-            seeButtons.forEach(button => {
-                button.addEventListener("click", function() {
-                    const commentsSection = this.previousElementSibling;
-                    commentsSection.style.display = commentsSection.style.display === "none" ? "block" : "none";
-                });
+
+    <div class="container">
+        <div class="posts">
+            <!-- New post form -->
+            <form id="postForm" method="POST">
+                <textarea id="caption" name="caption"  class="form-control" rows="4" cols="50" placeholder="Write something..." required></textarea><br>
+                <button type="submit" class="btn btn-primary" name="postButton">Post</button>
+            </form>
+            
+            <!-- Existing posts -->
+            {% for post in posts %}
+                <div class="post">
+                    <div class="post-header">
+                        <div class="profile-img"></div>
+                        <span>{{ post.user.first_name }}</span>
+                    </div>
+                    <div class="post-caption">{{ post.caption }}</div>
+                    <div class="post-comments hidden">
+                        <ul>
+                            {% for comment in post.comments %}
+                                <li><strong>{{ comment.user.first_name }}</strong>: {{ comment.comment }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <button class="see-comments">See Comments</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const seeButtons = document.querySelectorAll(".see-comments");
+        seeButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                const commentsSection = this.previousElementSibling;
+                commentsSection.classList.toggle("hidden");
             });
         });
-    </script>
+    });
+</script>
 
 
 {% endblock %}

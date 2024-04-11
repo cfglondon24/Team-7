@@ -65,3 +65,38 @@ def sign_up():
             return redirect(url_for('views.home'))
         
     return render_template('sign_up.html', user=current_user)
+
+@auth.route('/supporter-sign-up', methods=['GET', 'POST'])
+def supporter_sign_up():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        first_name = request.form.get('firstName')
+        password1 = request.form.get('password1')
+        password2 = request.form.get('password2')
+        location = request.form.get('location')
+        role = request.form.get('role')
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash('Email already exists.', category='danger')
+        elif len(email) < 4:
+            flash('Email must be greater than 3 characters.', category='danger')
+        elif len(first_name) < 2:
+            flash('Firstname must be greater than 1 character.', category='danger')
+        elif password1 != password2:
+            flash('Passwords don\'t match.', category='danger')
+        elif len(password1) < 7:
+            flash('Passwords must be at least 7 characters.', category='danger')
+        else:
+            if password1 == 'supporter':
+                role = RoleEnum.SUPPORTER
+            else:
+                role = RoleEnum.PATIENT
+            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='pbkdf2:sha256'), location=location, role=role)
+            db.session.add(new_user)
+            db.session.commit()
+            login_user(new_user, remember=True)
+            flash('Account created!', category='success')
+            return redirect(url_for('views.home'))
+        
+    return render_template('supporterSignUp.html', user=current_user)

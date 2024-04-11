@@ -7,8 +7,8 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open diary",
-            "file": "c:\\Users\\praka\\Downloads\\Hackathon\\Team-7\\diary"
+            "name": "Month diary",
+            "file": "c:\\Users\\praka\\Downloads\\Hackathon\\Team-7\\monthdiary.html"
         }
     ]
 }
