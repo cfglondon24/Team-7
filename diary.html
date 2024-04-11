@@ -5,57 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diary Entry Page</title>
     <style>
+        container {
+            width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: #D8322B;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #F5C722;
+        }
+
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
-            margin: 0 auto;
+            margin-left: 2 rem;
+            margin-right: 2 rem;
             padding: 2rem;
             background-color: #f5f5f5;
         }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
 
         .happiness-level-container {
             display: flex;
             margin-bottom: 2rem;
-            align-items: center; /* Added for vertical alignment */
+            align-items: center; 
         }
 
         .happiness-level-container label {
             flex-basis: 30%;
             margin-right: 2%;
-            color: #D8322B; /* Corrected color property */
+            color: black
         }
 
         .happiness-level-container select {
-            flex-basis: 70%; /* Adjusted width to fill remaining space */
+            flex-basis: 70%; 
             background-color: white;
             color: black;
-            border: 1px solid #D8322B;
-            padding: 0.5rem; /* Added padding for better appearance */
+            padding: 0.5rem; 
         }
 
         .exercise-container {
             display: flex;
             margin-bottom: 2rem;
-            align-items: center; /* Added for vertical alignment */
+            align-items: center; 
         }
 
         .exercise-container label {
             flex-basis: 30%;
-            margin-right: 2%;
-            color: #D8322B; /* Corrected color property */
+            margin-right: 2%; 
         }
 
         .exercise-container input[type="number"] {
-            flex-basis: 70%; /* Adjusted width to fill remaining space */
+            flex-basis: 70%; 
             background-color: white;
             color: black;
-            border: 1px solid #D8322B;
-            padding: 0.5rem; /* Added padding for better appearance */
+            padding: 0.5rem; 
         }
 
         textarea {
@@ -66,7 +75,6 @@
             margin-bottom: 1rem;
             background-color: white;
             color: black;
-            border: 1px solid #D8322B;
         }
 
         .photo-container {
@@ -74,11 +82,10 @@
         }
 
         .photo-container input[type="file"] {
-            width: 100%; /* Adjusted width to fill container */
+            width: 100%; 
             padding: 0.5rem;
             background-color: white;
             color: black;
-            border: 1px solid #D8322B;
         }
 
         button {
@@ -100,20 +107,26 @@
     <div>
         <h1>Diary Entry</h1>
         <form id="diary-form">
+            <div class="date-time">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required>
+            </div>
             <div class="happiness-level-container">
                 <label for="happiness-level">Happiness Level:</label>
-                <select id="happiness-level" name="happiness-level">
-                    <option value="1">😞</option>
-                    <option value="2">😕</option>
-                    <option value="3">😐</option>
-                    <option value="4">🙂</option>
-                    <option value="5">😀</option>
-                    <option value="6">😃</option>
-                    <option value="7">😄</option>
-                    <option value="8">😆</option>
-                    <option value="9">😉</option>
-                    <option value="10">😊</option>
-                </select>
+                <div class="happiness-level-panel">
+                    <div class="happiness-level-item" data-value="1">😞</div>
+                    <div class="happiness-level-item" data-value="2">😕</div>
+                    <div class="happiness-level-item" data-value="3">😐</div>
+                    <div class="happiness-level-item" data-value="4">🙂</div>
+                    <div class="happiness-level-item" data-value="5">😀</div>
+                    <div class="happiness-level-item" data-value="6">😃</div>
+                    <div class="happiness-level-item" data-value="7">😄</div>
+                    <div class="happiness-level-item" data-value="8">😆</div>
+                    <div class="happiness-level-item" data-value="9">😉</div>
+                    <div class="happiness-level-item" data-value="10">😊</div>
+                </div>
             </div>
             <div class="exercise-container">
                 <label for="exercise">Exercise (in minutes):</label>
@@ -125,29 +138,6 @@
             </div>
             <button type="submit">Save Entry</button>
         </form>
-    </div>
-
-    <script>
-        const form = document.getElementById("diary-form");
-
-        form.addEventListener("submit", (event) => {
-            event.preventDefault();
-
-            const formData = new FormData(form);
-
-            // We'll assume this object is available and has methods to upload photos.
-            // In a real-world example, you'd use a library or API to handle file uploads.
-            uploadPhotos(formData.getAll("photo"));
-
-            // You can now send the rest of the form data to your server using your preferred method (e.g., AJAX, Fetch API).
-        });
-
-        function uploadPhotos(photos) {
-            // In a real-world example, you'd use a library or API to handle file uploads.
-            // This is just a placeholder function to illustrate the concept.
-            console.log("Uploading " + photos.length + " photo(s)...");
-            // Your server-side code would then handle saving the uploaded photo(s).
-        }
-    </script>
+    </div>   
 </body>
 </html>
