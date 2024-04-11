@@ -1,0 +1,79 @@
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block content %}
+<form method="POST">
+    <h3 algin="center">Sign Up</h3>
+    <div class="form-group">
+        <label for="email">Email Address</label>
+        <input 
+            type="email" 
+            class="form-control" 
+            id="email" 
+            name="email" 
+            placeholder="Enter email" 
+        />
+
+        <label for="firstName">First Name</label>
+        <input 
+            type="firstName" 
+            class="form-control" 
+            id="firstName" 
+            name="firstName" 
+            placeholder="Enter first name" 
+        />
+
+        <label for="location">Location</label>
+        <select 
+            class="form-control"
+            id="location" 
+            name="location"
+        >
+            <option value="">Select a location</option>
+        </select>
+        <br/>
+
+
+        <label for="password1">Password</label>
+        <input 
+            type="password" 
+            class="form-control" 
+            id="password1" 
+            name="password1" 
+            placeholder="Enter password" 
+        />
+
+        <label for="password2">Password (Confirm)</label>
+        <input 
+            type="password" 
+            class="form-control" 
+            id="password2" 
+            name="password2" 
+            placeholder="Confirm password" 
+        />
+    </div>
+    <br />
+    <button
+        type="submit"
+        class="btn btn-primary">
+        Submit
+    </button>
+
+    <script>
+        // Array of UK cities
+        var cities = ['Aberdeen', 'Bath', 'Belfast', 'Birmingham', 'Brighton', 'Bristol', 'Cambridge', 'Canterbury', 
+        'Cardiff', 'Carlisle', 'Chester', 'Chichester', 'Coventry', 'Derby', 'Derry', 'Dundee', 'Durham', 'Edinburgh', 
+        'Exeter', 'Glasgow', 'Hereford', 'Inverness', 'Leeds', 'Leicester', 'Lichfield', 'Lincoln', 'Lisburn', 'Liverpool', 
+        'London', 'Londonderry', 'Manchester', 'Newcastle', 'Nottingham', 'Oxford', 'Peterborough', 'Plymouth', 'Portsmouth', 
+        'Reading', 'Salisbury', 'Sheffield', 'Southampton', 'St. Albans', 'St. Davids', 'Stirling', 'Swansea', 'Truro', 
+        'Wakefield', 'Wells', 'Winchester', 'Wolverhampton', 'Worcester', 'Worcester', 'York'];;
+    
+        // Loop through the cities array to generate options
+        var select = document.getElementById("location");
+        for (var i = 0; i < cities.length; i++) {
+            var option = document.createElement("option");
+            option.value = cities[i];
+            option.text = cities[i];
+            select.appendChild(option);
+        }
+    </script>
+
+</form>
+{% endblock %}
