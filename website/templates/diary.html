@@ -127,27 +127,31 @@
         </form>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        const form = document.getElementById("diary-form");
+        $('#diary-form').submit(function(e) {
+            e.preventDefault();
 
-        form.addEventListener("submit", (event) => {
-            event.preventDefault();
+            var formData = {
+                'happiness-level': $('#happiness-level').val(),
+                'exercise': $('#exercise').val(),
+                'explanation': $('#explanation').val(),
+                'photo': $('#photo')[0].files[0] // This will only get the first selected file
+            };
 
-            const formData = new FormData(form);
-
-            // We'll assume this object is available and has methods to upload photos.
-            // In a real-world example, you'd use a library or API to handle file uploads.
-            uploadPhotos(formData.getAll("photo"));
-
-            // You can now send the rest of the form data to your server using your preferred method (e.g., AJAX, Fetch API).
+            $.ajax({
+                url: '/diary',
+                type: 'POST',
+                data: JSON.stringify(formData),
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(response) {
+                    console.log(response);
+                }
+            });
         });
-
-        function uploadPhotos(photos) {
-            // In a real-world example, you'd use a library or API to handle file uploads.
-            // This is just a placeholder function to illustrate the concept.
-            console.log("Uploading " + photos.length + " photo(s)...");
-            // Your server-side code would then handle saving the uploaded photo(s).
-        }
     </script>
 </body>
 </html>
