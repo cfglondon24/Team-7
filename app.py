@@ -1,11 +1,7 @@
-# app.py
-from flask import Flask, render_template
+from website import create_app
 
-app = Flask(__name__)
+app = create_app()
 
-@app.route('/')
-def home():
-    return render_template('home.html')
-
+# Only when the main function is run, the app will run; So if the package is imported, it doesn't run the whole app
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True) # debug: Whenever sth is changed, the app reruns to update / debug
