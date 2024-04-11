@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User, RoleEnum
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -40,7 +40,7 @@ def sign_up():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
         location = request.form.get('location')
-        
+
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='danger')
@@ -53,10 +53,14 @@ def sign_up():
         elif len(password1) < 7:
             flash('Passwords must be at least 7 characters.', category='danger')
         else:
-            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='pbkdf2:sha256'), location=location)
+            if password1 == 'supporter':
+                role = RoleEnum.SUPPORTER
+            else:
+                role = RoleEnum.PATIENT
+            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='pbkdf2:sha256'), location=location, role=role)
             db.session.add(new_user)
             db.session.commit()
-            login_user(user, remember=True)
+            login_user(new_user, remember=True)
             flash('Account created!', category='success')
             return redirect(url_for('views.home'))
         

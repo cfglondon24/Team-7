@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
+from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
 from . import db
+from .models import Post, Comment, User, Diary
 
 views = Blueprint('views', __name__)
 
@@ -36,3 +37,28 @@ def calendar():
 @login_required
 def home():
     return render_template("home.html", user=current_user)
+
+@views.route('/admin', methods=['GET'])
+@login_required
+def admin():
+    # user = current_user
+    # if user.
+    return render_template("admin.html", user=current_user)
+
+@views.route('/profile', methods=['GET'])
+@login_required
+def profile():
+    return render_template("profile.html", user=current_user)
+
+@views.route('/social-media', methods=['GET', 'POST'])
+@login_required
+def social_media():
+    if request.method == 'POST':
+        caption = request.form.get('caption')
+        image = request.form.get('image')
+        new_post = Post(caption=caption, image=image, user=current_user.id)
+        db.session.add(new_post)
+        db.session.commit()
+        flash('Note added!', category='success')
+
+    return render_template("socialMedia.html", user=current_user)
