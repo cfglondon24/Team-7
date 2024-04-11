@@ -41,7 +41,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer, db.ForeignKey('user.id'))
     caption = db.Column(db.String(500))
-    photo = Column(ImageColumn(size=(300, 300, True), thumbnail_size=(30, 30, True)), nullable=True)
+    # photo = Column(ImageColumn(size=(300, 300, True), thumbnail_size=(30, 30, True)), nullable=True)
     comments = db.relationship('Comment')
     date = db.Column(db.DateTime(timezone=True), default=func.now())
 
