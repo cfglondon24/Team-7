@@ -1,116 +1,142 @@
 {% extends "base.html" %}
-
-{% block title %}Diary Entry{% endblock %}
+{% block title %}Diary Entry Page{% endblock %}
 
 {% block content %}
-    <style>
-        /* Global styles */
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: #fff; /* White background */
-            color: #000; /* Black text */
-        }
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: #f5f5f5;
+    }
 
         h1 {
             text-align: center;
             margin-bottom: 2rem;
             color: #D8322B; /* Red title */
         }
+    h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
 
-        /* Form styles */
-        .form-group {
-            margin-bottom: 2rem;
-        }
+    .happiness-level-container {
+        display: flex;
+        margin-bottom: 2rem;
+        align-items: center; /* Added for vertical alignment */
+    }
 
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #000; /* Black label text */
-        }
+    .happiness-level-container label {
+        flex-basis: 30%;
+        margin-right: 2%;
+        color: #D8322B; /* Corrected color property */
+    }
 
-        .form-group select,
-        .form-group input[type="number"],
-        .form-group textarea,
-        .form-group input[type="file"] {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #D8322B; /* Red border */
-            border-radius: 4px;
-            background-color: #fff; /* White background */
-            color: #000; /* Black text */
-            transition: border-color 0.3s, background-color 0.3s;
-        }
+    .happiness-level-container select {
+        flex-basis: 70%; /* Adjusted width to fill remaining space */
+        background-color: white;
+        color: black;
+        border: 1px solid #D8322B;
+        padding: 0.5rem; /* Added padding for better appearance */
+    }
 
-        .form-group select:focus,
-        .form-group input[type="number"]:focus,
-        .form-group textarea:focus,
-        .form-group input[type="file"]:focus {
-            outline: none;
-            border-color: #000; /* Black border on focus */
-            background-color: #f5f5f5; /* Light gray background on focus */
-        }
+    .exercise-container {
+        display: flex;
+        margin-bottom: 2rem;
+        align-items: center; /* Added for vertical alignment */
+    }
 
-        button {
-            background-color: #D8322B; /* Red button background */
-            color: #fff; /* White text */
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: background-color 0.3s;
-        }
+    .exercise-container label {
+        flex-basis: 30%;
+        margin-right: 2%;
+        color: #D8322B; /* Corrected color property */
+    }
 
-        button:hover {
-            background-color: #9F1116; /* Darker red on hover */
-        }
-    </style>
+    .exercise-container input[type="number"] {
+        flex-basis: 70%; /* Adjusted width to fill remaining space */
+        background-color: white;
+        color: black;
+        border: 1px solid #D8322B;
+        padding: 0.5rem; /* Added padding for better appearance */
+    }
 
-    <div>
-        <h1>Diary Entry</h1>
-        <form id="diary-form">
-            <div class="form-group">
-                <label for="happiness-level">Happiness Level:</label>
-                <select id="happiness-level" name="happiness-level">
-                    <option value="1">😞</option>
-                    <option value="2">😕</option>
-                    <option value="3">😐</option>
-                    <option value="4">🙂</option>
-                    <option value="5">😀</option>
-                    <option value="6">😃</option>
-                    <option value="7">😄</option>
-                    <option value="8">😆</option>
-                    <option value="9">😉</option>
-                    <option value="10">😊</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exercise">Exercise (in minutes):</label>
-                <input type="number" id="exercise" name="exercise" min="0">
-            </div>
-            <div class="form-group">
-                <label for="explanation">Explanation:</label>
-                <textarea id="explanation" name="explanation" placeholder="Type your explanation here..."></textarea>
-            </div>
-            <div class="form-group">
-                <label for="photo">Upload Photo(s):</label>
-                <input type="file" id="photo" name="photo" accept="image/*" multiple>
-            </div>
-            <button type="submit">Save Entry</button>
-        </form>
-    </div>
+    textarea {
+        width: 100%;
+        min-height: 200px;
+        resize: vertical;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        background-color: white;
+        color: black;
+        border: 1px solid #D8322B;
+    }
 
-    <script>
-        const form = document.getElementById("diary-form");
+    .photo-container {
+        margin-bottom: 2rem;
+    }
 
-        form.addEventListener("submit", (event) => {
-            event.preventDefault();
+    .photo-container input[type="file"] {
+        width: 100%; /* Adjusted width to fill container */
+        padding: 0.5rem;
+        background-color: white;
+        color: black;
+        border: 1px solid #D8322B;
+    }
 
-            const formData = new FormData(form);
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 1rem;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<div class="content-container">
+    <h1>Diary Entry</h1>
+    <form id="diary" method="POST">
+        <div class="happiness-level-container">
+            <label for="happiness-level">Happiness Level:</label>
+            <select id="happiness-level" name="happiness_level">
+                <option value="1">😞</option>
+                <option value="2">😕</option>
+                <option value="3">😐</option>
+                <option value="4">🙂</option>
+                <option value="5">😀</option>
+                <option value="6">😃</option>
+                <option value="7">😄</option>
+                <option value="8">😆</option>
+                <option value="9">😉</option>
+                <option value="10">😊</option>
+            </select>
+        </div>
+        <div class="exercise-container">
+            <label for="exercise">Exercise (in minutes):</label>
+            <input type="number" id="exercise" name="exercise_minutes" min="0">
+        </div>
+        <textarea id="explanation" name="explanation" placeholder="Type your explanation here..."></textarea>
+        <!-- <div class="photo-container">
+            <input type="file" id="photo" name="photo" accept="image/*" multiple>
+        </div> -->
+        <button type="submit">Save Entry</button>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById("diary-form");
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
 
          
             uploadPhotos(formData.getAll("photo"));

@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% block title %}Events Page{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+        background-color: #D8322B;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        color: #F5C722;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        color: #666;
+    }
+
+    .event-card {
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-left: 2rem;
+        margin-right: 2rem;
+        margin-bottom: 2rem;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .event-photo {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 4px 4px 0 0;
+        margin-bottom: 1rem;
+    }
+
+    .sign-up-button {
+        background-color: #F5C722;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        margin-top: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .sign-up-button:hover {
+        background-color: #F5C722;
+    }
+
+    #mock-sign-up-form {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+
+    #mock-sign-up-form form {
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 2rem;
+        width: 30rem;
+    }
+
+    #mock-sign-up-form form input[type="email"],
+    #mock-sign-up-form form input[type="text"],
+    #mock-sign-up-form form input[type="button"] {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    #mock-sign-up-form form button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #mock-sign-up-form form button:hover {
+        background-color: #45a049;
+    }
+</style>
+
+
+<div class="container">
+    <h1>Events and Bookings</h1>
+    <div class="event-card">
+        <img class="event-photo" src="event1.jpg" alt="Event 1">
+        <h2>Support Group for African Heritage</h2>
+        <p>Monday 5pm</p>
+        <p>A safe environment to share your stories and recovery pathway from sepsis in a non-judgemental way. All personally tailored to give you the best experience and fastest recovery.</p>
+        <button class="sign-up-button">Sign Up</button>
+    </div>
+    <div class="event-card">
+        <img class="event-photo" src="event2.jpg" alt="Event 2">
+        <h2>Support Group for South Asian Heritage</h2>
+        <p> Wednesday 5-6pm</p>
+        <p>A safe environment to share your stories and recovery pathway from sepsis in a non-judgemental way. All personally tailored to give you the best experience and fastest recovery</p>
+        <button class="sign-up-button">Sign Up</button>
+    </div>
+    <div class="event-card">
+        <img class="event-photo" src="event1.jpg" alt="Event 1">
+        <h2>Support group for Current Job-Hunters</h2>
+        <p>Thursday 5-6pm</p>
+        <p>Looking to break-through in your career? Or currently joined a new job and looking for extra support? We're here to help you in any way you need us to. Come join us for an open conversation and guidance.</p>
+        <button class="sign-up-button">Sign Up</button>
+    </div>
+    <div class="event-card">
+        <img class="event-photo" src="event1.jpg" alt="Event 1">
+        <h2>Training Course</h2>
+        <p>Friday 5-6pm</p>
+        <p>Program for those wishing to give back to this community. We'll train you to develop the skills and support current recovering inteviduals on a one on one basis aswell as in a group setting</p>
+        <button class="sign-up-button">Sign Up</button>
+    </div>
+    <div class="event-card">
+        <img class="event-photo" src="event1.jpg" alt="Event 1">
+        <h2>One-to-One Meeting</h2>
+        <div class="date-time">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required>
+        </div>
+        <p>If you further more specific support please submit what time works best for you and we'll get in touch to set up a meeting with one of our qualified support</p>
+        <button class="sign-up-button">Sign Up</button>
+    </div>
+</div>
+
+<div id="mock-sign-up-form">
+    <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <button type="submit">Submit</button>
+        <button type="button" onclick="document.getElementById('mock-sign-up-form').style.display = 'none';">Cancel</button>
+    </form>
+</div>
+
+<script>
+    const signUpButtons = document.querySelectorAll('.sign-up-button');
+    signUpButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            document.getElementById('mock-sign-up-form').style.display = 'block';
+        });
+    });
+</script>
+
+{% endblock %}
