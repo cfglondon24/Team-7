@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Hello World{% endblock %}
+
+{% block content %}
+<div>
+    <li>Email: {{ user.email }}</li>
+    <li>First Name: {{ user.first_name }}</li>
+    <li>Role: {{ user.role }}</li>
+</div>
+{% endblock %}
