@@ -60,3 +60,17 @@ def social_media():
     captions = Post.query.with_entities(Post.caption).all()
     print(captions)
     return render_template("socialMedia.html", user=current_user, posts=posts)
+
+@views.route('/event-signup', methods=['GET','POST'])
+@login_required
+def event_signup():
+    #pip install pip install newsapi-python
+    from newsapi import NewsApiClient  
+    
+    newsAPI = NewsApiClient(api_key='b2c8adec9244439385335aee2daf292e')
+    
+    all_articles = newsAPI.get_everything(q='charity', page_size=12)
+    
+    news = [{'title': article['title'], 'url': article['url']} for article in all_articles['articles']]
+    
+    return render_template("event-signup.html", user=current_user, news=news)
