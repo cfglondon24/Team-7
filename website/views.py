@@ -5,33 +5,6 @@ from .models import Post, Comment, User, Diary, RoleEnum
 
 views = Blueprint('views', __name__)
 
-@views.route('/diary', methods=['GET', 'POST'])
-#@login_required
-def diary():
-    if request.method == 'POST':
-        data = request.get_json()
-        print(data)  # This will print the JSON data to the console
-        # Will sort out data handling here
-        return redirect(url_for('views.home'))
-    else:
-        return render_template("diary.html", user=current_user)
-
-@views.route('/calendar', methods=['GET', 'POST']) #decorator
-#@login_required
-def calendar():
-    # Sample event data
-    events = [
-        {
-            'title': 'Event 1',
-            'start': '2024-04-11'
-        },
-        {
-            'title': 'Event 2',
-            'start': '2024-04-15'
-        }
-    ]
-    return render_template("calendar.html", user=current_user, events=events)
-
 # Define the home URL route
 @views.route('/', methods=['GET', 'POST']) #decorator
 @login_required
@@ -60,3 +33,24 @@ def social_media():
     captions = Post.query.with_entities(Post.caption).all()
     print(captions)
     return render_template("socialMedia.html", user=current_user, posts=posts)
+
+@views.route('/calendar', methods=['GET', 'POST'])
+@login_required
+def event():
+    return render_template("eventSignUp.html", user=current_user)
+
+@views.route('/diary', methods=['GET', 'POST'])
+@login_required
+def diary():
+    if request.method == 'POST':
+        print(request.form.get('diary'))
+        new_diary = Diary(
+            happiness_level=request.form.get('happiness_level'), 
+            exercise_minutes = request.form.get('exercise_minutes'),
+            explanation = request.form.get('explanation'),
+            user=current_user.id)
+        db.session.add(new_diary)
+        db.session.commit()
+        flash('diary added!', category='success')
+
+    return render_template("diary.html", user=current_user)

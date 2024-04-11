@@ -32,10 +32,11 @@ class User(db.Model, UserMixin):
 
 class Diary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.Integer, db.ForeignKey('user.id'))
-    content = db.Column(db.String(5000))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
-
+    user = db.Column(db.Integer, db.ForeignKey('user.id'))  # Assuming 'user' is another model
+    happiness_level = db.Column(db.Integer)
+    exercise_minutes = db.Column(db.Integer)
+    explanation = db.Column(db.String(5000))
+    date = db.Column(db.DateTime(timezone=True), default=db.func.now())
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
