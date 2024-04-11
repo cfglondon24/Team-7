@@ -35,14 +35,12 @@
         .post-header {
             display: flex;
             align-items: center;
+            padding: 10px;
         }
 
-        .profile-img {
-            width: 40px;
-            height: 40px;
-            background-color: #ccc; /* Placeholder color */
-            border-radius: 50%;
-            margin-right: 10px;
+        /* Removed circular profile image placeholder */
+        .post-header .profile-img {
+            display: none;
         }
 
         .post-header span {
@@ -52,6 +50,7 @@
         .post-caption {
             padding: 10px;
             word-wrap: break-word;
+            text-align: center; /* Center-align the caption */
         }
 
         .post-comments {
@@ -67,21 +66,7 @@
             margin-bottom: 5px;
         }
 
-        /* New post form */
-        #postForm {
-            margin-bottom: 20px;
-        }
-
-        #postContent {
-            width: calc(100% - 80px); /* Adjust the width as needed */
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        #postForm button {
-            padding: 8px 16px;
+        .see-comments {
             background-color: #3897f0;
             color: #fff;
             border: none;
@@ -91,7 +76,7 @@
             transition: background-color 0.3s ease;
         }
 
-        #postForm button:hover {
+        .see-comments:hover {
             background-color: #3578e5;
         }
 
@@ -112,7 +97,7 @@
             {% for post in posts %}
                 <div class="post">
                     <div class="post-header">
-                        <div class="profile-img"></div>
+                        <!-- Removed circular profile image placeholder -->
                         <span>{{ post.user.first_name }}</span>
                     </div>
                     <div class="post-caption">{{ post.caption }}</div>
@@ -123,7 +108,7 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    <button class="see-comments">See Comments</button>
+                    <!-- <button class="see-comments">See Comments</button> -->
                 </div>
             {% endfor %}
         </div>
@@ -141,6 +126,3 @@
         });
     });
 </script>
-
-
-{% endblock %}
