@@ -1,131 +1,132 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
 
-{% block content %}
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        background-color: #f5f5f5;
-        margin: 0;
-        padding: 0;
-    }
+        .container {
+            width: 100%; 
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: #D8322B;
+            padding: 20px; 
+        }
 
-    .container {
-        width: 100%; 
-        margin: 0 auto;
-        overflow: hidden;
-        background-color: #D8322B;
-        padding: 20px; 
-    }
+        h1 {
+            font-size: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #F5C722;
+        }
 
-    h1 {
-        font-size: 2rem;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        text-align: center;
-        color: #F5C722;
-    }
+        h2 {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: #666;
+        }
 
-    h2 {
-        font-size: 1.2rem;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        color: #666;
-    }
+        .event-card {
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            margin-left: 2rem;
+            margin-right: 2rem;
+            padding: 2rem;
+            text-align: center;
+        }
 
-    .event-card {
-        background-color: #fff;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin-bottom: 2rem;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        padding: 2rem;
-        text-align: center;
-    }
+        .event-photo {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px 4px 0 0;
+            margin-bottom: 1rem;
+        }
 
-    .event-photo {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 4px 4px 0 0;
-        margin-bottom: 1rem;
-    }
+        .sign-up-button {
+            background-color: #F5C722;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-    .sign-up-button {
-        background-color: #F5C722;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 4px;
-        font-size: 1rem;
-        margin-top: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
+        .sign-up-button:hover {
+            background-color: #45a049; /* Corrected hover color */
+        }
 
-    .sign-up-button:hover {
-        background-color: #45a049; /* Corrected hover color */
-    }
+        #mock-sign-up-form {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
 
-    #mock-sign-up-form {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-    }
+        #mock-sign-up-form form {
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 2rem;
+            width: 80%; /* Adjusted width for better responsiveness */
+            max-width: 400px; /* Added max-width for smaller screens */
+        }
 
-    #mock-sign-up-form form {
-        background-color: #fff;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 2rem;
-        width: 80%; /* Adjusted width for better responsiveness */
-        max-width: 400px; /* Added max-width for smaller screens */
-    }
+        #mock-sign-up-form form input[type="email"],
+        #mock-sign-up-form form input[type="text"],
+        #mock-sign-up-form form input[type="button"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-    #mock-sign-up-form form input[type="email"],
-    #mock-sign-up-form form input[type="text"],
-    #mock-sign-up-form form input[type="button"] {
-        width: 100%;
-        padding: 0.5rem;
-        margin-bottom: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
+        #mock-sign-up-form form button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-    #mock-sign-up-form form button {
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 4px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    #mock-sign-up-form form button:hover {
-        background-color: #45a049;
-    }
-</style>
-
-
+        #mock-sign-up-form form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    
 </head>
 <body>
-    
     <div class="container">
         <h1>About Our Community</h1>
         <div class="event-card">
@@ -180,5 +181,4 @@
         });
     </script>
 </body>
-{% endblock %}
-
+</html>

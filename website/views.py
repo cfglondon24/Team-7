@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from . import db
-from .models import Post, Comment, User, Diary
+from .models import Post, Comment, User, Diary, RoleEnum
 
 views = Blueprint('views', __name__)
 

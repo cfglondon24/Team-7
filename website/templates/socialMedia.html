@@ -35,7 +35,6 @@
         .post-header {
             display: flex;
             align-items: center;
-            padding: 10px;
         }
 
         .profile-img {
@@ -68,7 +67,21 @@
             margin-bottom: 5px;
         }
 
-        .see-comments {
+        /* New post form */
+        #postForm {
+            margin-bottom: 20px;
+        }
+
+        #postContent {
+            width: calc(100% - 80px); /* Adjust the width as needed */
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #postForm button {
+            padding: 8px 16px;
             background-color: #3897f0;
             color: #fff;
             border: none;
@@ -78,7 +91,7 @@
             transition: background-color 0.3s ease;
         }
 
-        .see-comments:hover {
+        #postForm button:hover {
             background-color: #3578e5;
         }
 
@@ -128,3 +141,6 @@
         });
     });
 </script>
+
+
+{% endblock %}
