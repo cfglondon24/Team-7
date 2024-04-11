@@ -4,45 +4,60 @@
 {% block content %}
 <style>
     body {
-        background-color: #f8f9fa; /* Light gray background */
-        font-family: 'Roboto', sans-serif; /* Use Roboto font for modern look */
-    }
-    .container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-    }
-    .screen {       
-        background: #ffffff; /* White background */
-        border-radius: 20px; /* Rounded corners */
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
-        overflow: hidden; /* Hide overflow for smoother edges */
-    }
-    .screen__content {
-        padding: 50px; /* Add padding for content */
-    }
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url("/static/mainlogo.png"); /* Replace 'your-background-image.jpg' with the path to your image */
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the background image */
+}
+
+.screen {       
+    background: rgba(255, 255, 255, 0.9); /* White background with some transparency */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    overflow: hidden; /* Hide overflow for smoother edges */
+}
+
+.screen__content {
+    padding: 50px; /* Add padding for content */
+}
     .login__field {
         margin-bottom: 30px; /* Increase spacing between fields */
         position: relative;    
     }
 
-    
+    .login__icon {
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        transform: translateY(-50%);
+        color: #D8322B; /* Blue icon color */
+    }
+
     .login__input {
         border: none;
         border-bottom: 1px solid #ced4da; /* Light gray border bottom */
         background: transparent; /* Transparent background */
-        padding: 10px 20px;
+        padding: 10px 40px 10px 40px; /* Adjusted padding for icon */
         font-size: 16px;
-        width: calc(100% - 40px); /* Adjust width for icon */
+        width: calc(100% - 80px); /* Adjusted width for icon */
         transition: border-color 0.3s ease;
     }
     .login__input:focus {
         outline: none;
-        border-color: #007bff; /* Blue border bottom on focus */
+        border-color: #D8322B; /* Blue border bottom on focus */
     }
     .login__submit {
-        background: #007bff; /* Blue button background */
+        background: #D8322B; /* Blue button background */
         color: #ffffff; /* White text color */
         border: none;
         border-radius: 20px;
@@ -53,7 +68,7 @@
         transition: background-color 0.3s ease;
     }
     .login__submit:hover {
-        background: #0056b3; /* Darker blue on hover */
+        background: #D8322B; /* Darker blue on hover */
     }
     .button__icon {
         margin-left: auto;
@@ -65,7 +80,7 @@
     .social-login__icon {
         margin: 0 10px;
         font-size: 24px;
-        color: #007bff; /* Blue social icons */
+        color: #D8322B; /* Blue social icons */
         transition: transform 0.3s ease;
     }
     .social-login__icon:hover {
@@ -73,7 +88,7 @@
     }
 </style>
 
-<form method="POST" class="container">
+<div class="container">
     <div class="screen">
         <div class="screen__content">
             <form class="login">
@@ -92,16 +107,14 @@
             </form>
             <div class="social-login">
                 <h3>Log in via</h3>
-                <img src="C:\Users\jommy\Team-7\images" alt="Facebook">
                 <div class="social-icons">
-                    <img src="website\templates\images\icons8-facebook-48.jpeg" alt="Facebookllg" width="500" height="600">
-                    <a class="social-login__icon" href="#"></a>
-                    <a class="social-login__icon" href="#"><img src="/images/icons8-twitter-50.png" alt="Twitter"></a>
-                    <a class="social-login__icon" href="#"><img src="/images/icons8-google-48.png" alt="Instagram"></a>
+                    <a class="social-login__icon" href="#"><i class="fab fa-facebook"></i></a>
+                    <a class="social-login__icon" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="social-login__icon" href="#"><i class="fab fa-google"></i></a>
                 </div>
             </div>
         </div>
     </div>
-</form>
+</div>
 
 {% endblock %}
