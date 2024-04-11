@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Social Media{% endblock %}
+
+{% block content %}
+    <form id="postForm">
+        <textarea id="postContent" placeholder="Write something..." rows="4" cols="50"></textarea><br>
+        <button type="submit">Post</button>
+    </form>
+
+    <!-- Existing posts -->
+    <div id="postsContainer">
+        <!-- Posts will be dynamically added here -->
+    </div>
+
+    <script>
+        // Dummy data for demonstration purposes
+        var posts = [
+            { user: "User1", content: "This is post 1" },
+            { user: "User2", content: "This is post 2" },
+            { user: "User3", content: "This is post 3" }
+        ];
+
+        // Function to display existing posts
+        function displayPosts() {
+            var postsContainer = document.getElementById("postsContainer");
+            postsContainer.innerHTML = "";
+
+            posts.forEach(function(post) {
+                var postDiv = document.createElement("div");
+                postDiv.classList.add("post");
+                postDiv.innerHTML = "<strong>" + post.user + ":</strong> " + post.content;
+                postsContainer.appendChild(postDiv);
+            });
+        }
+
+        // Function to handle form submission
+        document.getElementById("postForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var postContent = document.getElementById("postContent").value;
+            var newPost = { user: "User", content: postContent }; // Assuming the user is always the same for simplicity
+            posts.push(newPost);
+            displayPosts();
+            document.getElementById("postContent").value = ""; // Clear the textarea after posting
+        });
+
+        // Initial display of posts
+        displayPosts();
+    </script>
+{% endblock %}
