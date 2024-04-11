@@ -6,14 +6,37 @@
     <title>{% block title %}Home{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
+    
     <style>
+        /* Navbar */
         .navbar {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            background-color: #000000; /* Black navbar background */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* White border bottom */
         }
+        .navbar-nav .nav-link {
+            color: #ffffff !important; /* White text color for navbar links */
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ff0000 !important; /* Red text color on hover */
+        }
+
+        /* Alerts */
         .alert {
             margin-bottom: 20px;
         }
+
+        /* Container */
+        .container {
+            background-color: #ffffff; /* White container background */
+            color: #000000; /* Black text color */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            padding: 20px; /* Add padding */
+        }
     </style>
+    </style>
+
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -24,23 +47,34 @@
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/">Home</a>  <!-- Home -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/social-media">Social Media</a>
+                    <a class="nav-link" href="/social-media">Social Media</a>   <!-- Sopcila media -->
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile">My Profile</a>
+                    <a class="nav-link" href="/diary">My Diary</a>    <!--  Diary  -->
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
+                    <a class="nav-link" href="/calender"> Events and News</a>    <!--  calener  -->
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">My Profile</a>    <!--  Profile  -->
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>            <!--   Logout -->
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/login">Login</a>          <!--    kfnv -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/sign-up">Sign Up</a>
+                    <a class="nav-link" href="/sign-up">Sign Up</a>              <!--    kfnv -->
                 </li>
                 {% endif %}
             </ul>
