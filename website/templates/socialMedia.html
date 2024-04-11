@@ -2,48 +2,118 @@
 {% block title %}Social Media{% endblock %}
 
 {% block content %}
-    <form id="postForm">
-        <textarea id="postContent" placeholder="Write something..." rows="4" cols="50"></textarea><br>
-        <button type="submit">Post</button>
-    </form>
-
-    <!-- Existing posts -->
-    <div id="postsContainer">
-        <!-- Posts will be dynamically added here -->
+    <div class="container">
+        <div class="posts">
+            <!-- New post form -->
+            <form id="postForm" method="POST">
+                <textarea id="caption" placeholder="Write something..." class="form-control" rows="4" cols="50"></textarea><br>
+                <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+            
+            <!-- Existing posts -->
+            {% for post in posts %}
+                <div class="post">
+                    <div class="post-header">
+                        <span>{{ post.user.first_name }}</span>
+                    </div>
+                    <div class="post-caption">{{ post.caption }}</div>
+                    <div class="post-comments" style="display: none;">
+                        <ul>
+                            {% for comment in post.comments %}
+                                <li><strong>{{ comment.user.first_name }}</strong>: {{ comment.comment }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <button class="see-comments">See Comments</button>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-
-    <script>
-        // Dummy data for demonstration purposes
-        var posts = [
-            { user: "User1", content: "This is post 1" },
-            { user: "User2", content: "This is post 2" },
-            { user: "User3", content: "This is post 3" }
-        ];
-
-        // Function to display existing posts
-        function displayPosts() {
-            var postsContainer = document.getElementById("postsContainer");
-            postsContainer.innerHTML = "";
-
-            posts.forEach(function(post) {
-                var postDiv = document.createElement("div");
-                postDiv.classList.add("post");
-                postDiv.innerHTML = "<strong>" + post.user + ":</strong> " + post.content;
-                postsContainer.appendChild(postDiv);
-            });
+    <style>
+        .container {
+            max-width: 600px;
+            margin: auto;
         }
 
-        // Function to handle form submission
-        document.getElementById("postForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            var postContent = document.getElementById("postContent").value;
-            var newPost = { user: "User", content: postContent }; // Assuming the user is always the same for simplicity
-            posts.push(newPost);
-            displayPosts();
-            document.getElementById("postContent").value = ""; // Clear the textarea after posting
-        });
+        .posts {
+            margin-top: 20px;
+        }
 
-        // Initial display of posts
-        displayPosts();
+        .post {
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .post-header {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .post-header img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .post-caption {
+            padding: 10px;
+        }
+
+        .post-comments {
+            padding: 10px;
+        }
+
+        .post-comments ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .post-comments ul li {
+            margin-bottom: 5px;
+        }
+
+        /* New post form */
+        #postForm {
+            margin-bottom: 20px;
+        }
+
+        #postContent {
+            width: calc(100% - 80px); /* Adjust the width as needed */
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #postForm button {
+            padding: 8px 16px;
+            background-color: #3897f0;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #postForm button:hover {
+            background-color: #3578e5;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const seeButtons = document.querySelectorAll(".see-comments");
+    
+            seeButtons.forEach(button => {
+                button.addEventListener("click", function() {
+                    const commentsSection = this.previousElementSibling;
+                    commentsSection.style.display = commentsSection.style.display === "none" ? "block" : "none";
+                });
+            });
+        });
     </script>
+
+
 {% endblock %}

@@ -38,13 +38,6 @@ def calendar():
 def home():
     return render_template("home.html", user=current_user)
 
-@views.route('/admin', methods=['GET'])
-@login_required
-def admin():
-    # user = current_user
-    # if user.
-    return render_template("admin.html", user=current_user)
-
 @views.route('/profile', methods=['GET'])
 @login_required
 def profile():
@@ -53,12 +46,13 @@ def profile():
 @views.route('/social-media', methods=['GET', 'POST'])
 @login_required
 def social_media():
+    posts = Post.query.all()
     if request.method == 'POST':
         caption = request.form.get('caption')
-        image = request.form.get('image')
-        new_post = Post(caption=caption, image=image, user=current_user.id)
+        # image = request.form.get('image')
+        new_post = Post(caption=caption, user=current_user.id)
         db.session.add(new_post)
         db.session.commit()
         flash('Note added!', category='success')
 
-    return render_template("socialMedia.html", user=current_user)
+    return render_template("socialMedia.html", user=current_user, posts=posts)
