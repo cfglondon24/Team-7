@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f8f9fa; /* Light gray background */
+        font-family: 'Roboto', sans-serif; /* Use Roboto font for modern look */
+    }
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    .screen {       
+        background: #ffffff; /* White background */
+        border-radius: 20px; /* Rounded corners */
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        overflow: hidden; /* Hide overflow for smoother edges */
+    }
+    .screen__content {
+        padding: 50px; /* Add padding for content */
+    }
+    .login__field {
+        margin-bottom: 30px; /* Increase spacing between fields */
+        position: relative;    
+    }
+    .login__icon {
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        transform: translateY(-50%);
+        color: #495057; /* Dark gray icon color */
+    }
+    .login__input {
+        border: none;
+        border-bottom: 1px solid #ced4da; /* Light gray border bottom */
+        background: transparent; /* Transparent background */
+        padding: 10px 20px;
+        font-size: 16px;
+        width: calc(100% - 40px); /* Adjust width for icon */
+        transition: border-color 0.3s ease;
+    }
+    .login__input:focus {
+        outline: none;
+        border-color: #007bff; /* Blue border bottom on focus */
+    }
+    .login__submit {
+        background: #007bff; /* Blue button background */
+        color: #ffffff; /* White text color */
+        border: none;
+        border-radius: 20px;
+        font-size: 16px;
+        padding: 15px 0;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .login__submit:hover {
+        background: #0056b3; /* Darker blue on hover */
+    }
+    .button__icon {
+        margin-left: auto;
+    }
+    .social-login {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .social-login__icon {
+        margin: 0 10px;
+        font-size: 24px;
+        color: #007bff; /* Blue social icons */
+        transition: transform 0.3s ease;
+    }
+    .social-login__icon:hover {
+        transform: scale(1.2); /* Scale up on hover */
+    }
+</style>
+
+<form method="POST" class="container">
+    <div class="screen">
+        <div class="screen__content">
+            <form class="login">
+                <div class="login__field">
+                    <i class="login__icon fas fa-user"></i>
+                    <input type="text" class="login__input" placeholder="User name / Email">
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-lock"></i>
+                    <input type="password" class="login__input" placeholder="Password">
+                </div>
+                <button class="button login__submit">
+                    <span class="button__text">Log In Now</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>                
+            </form>
+            <div class="social-login">
+                <h3>Log in via</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-login__icon fab fa-facebook"></a>
+                    <a href="#" class="social-login__icon fab fa-twitter"></a>
+                    <a href="#" class="social-login__icon fab fa-instagram"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

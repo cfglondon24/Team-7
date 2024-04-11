@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}Social Media{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="posts">
+            <!-- New post form -->
+            <form id="postForm" method="POST">
+                <textarea id="caption" placeholder="Write something..." class="form-control" rows="4" cols="50"></textarea><br>
+                <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+            
+            <!-- Existing posts -->
+            {% for post in posts %}
+                <div class="post">
+                    <div class="post-header">
+                        <span>{{ post.user.first_name }}</span>
+                    </div>
+                    <div class="post-caption">{{ post.caption }}</div>
+                    <div class="post-comments" style="display: none;">
+                        <ul>
+                            {% for comment in post.comments %}
+                                <li><strong>{{ comment.user.first_name }}</strong>: {{ comment.comment }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <button class="see-comments">See Comments</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .posts {
+            margin-top: 20px;
+        }
+
+        .post {
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .post-header {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .post-header img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .post-caption {
+            padding: 10px;
+        }
+
+        .post-comments {
+            padding: 10px;
+        }
+
+        .post-comments ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .post-comments ul li {
+            margin-bottom: 5px;
+        }
+
+        /* New post form */
+        #postForm {
+            margin-bottom: 20px;
+        }
+
+        #postContent {
+            width: calc(100% - 80px); /* Adjust the width as needed */
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #postForm button {
+            padding: 8px 16px;
+            background-color: #3897f0;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #postForm button:hover {
+            background-color: #3578e5;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const seeButtons = document.querySelectorAll(".see-comments");
+    
+            seeButtons.forEach(button => {
+                button.addEventListener("click", function() {
+                    const commentsSection = this.previousElementSibling;
+                    commentsSection.style.display = commentsSection.style.display === "none" ? "block" : "none";
+                });
+            });
+        });
+    </script>
+
+
+{% endblock %}

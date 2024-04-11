@@ -1,0 +1,142 @@
+{% extends "base.html" %} 
+{% block title %}Sign Up{% endblock %} 
+{% block content %}
+<style>
+    body {
+        background-image: url('images/grouppic.jpg'); /* Background image */
+        background-size: cover; /* Cover the entire background */
+        background-color: rgba(255, 0, 0, 0.5); /* Red background overlay */
+        font-family: 'Roboto', sans-serif; /* Use Roboto font for modern look */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+    }
+
+    .form-group {
+        background-color: #ffffcc; /* Yellow background for form group */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    }
+    
+    .footer-logo {
+        text-align: left;
+        margin-top: 50px;
+    }
+
+    /* Input styles */
+    input[type="email"],
+    input[type="password"],
+    select {
+        width: 100%; /* Full width */
+        padding: 10px; /* Add some padding */
+        margin-bottom: 10px; /* Add some space between inputs */
+        border: none; /* Remove default border */
+        border-radius: 5px; /* Add border radius */
+        background-color: #fff; /* White background */
+        border-bottom: 2px solid #ccc; /* Light gray bottom border */
+        transition: border-color 0.3s ease; /* Smooth transition for border color */
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    select:focus {
+        outline: none; /* Remove default focus outline */
+        border-bottom-color: #ff0000; /* Red bottom border on focus */
+    }
+
+    /* Button styles */
+    .btn-primary {
+        background-color: #ff0000; /* Red button background */
+        color: #fff; /* White text color */
+        border: none; /* Remove default border */
+        border-radius: 5px; /* Add border radius */
+        padding: 10px 20px; /* Add padding */
+        font-size: 16px; /* Font size */
+        cursor: pointer; /* Change cursor to pointer on hover */
+        transition: background-color 0.3s ease; /* Smooth transition for background color */
+    }
+
+    .btn-primary:hover {
+        background-color: #e60000; /* Darker red on hover */
+    }
+</style>
+
+<form method="POST">
+    <h3 align="center">Sign Up</h3>
+    <div class="form-group">
+        <label for="email">Email Address</label>
+        <input 
+            type="email" 
+            class="form-control" 
+            id="email" 
+            name="email" 
+            placeholder="Enter email" 
+        />
+
+        <label for="firstName">First Name</label>
+        <input 
+            type="text" /* Changed to text type */
+            class="form-control" 
+            id="firstName" 
+            name="firstName" 
+            placeholder="Enter first name" 
+        />
+
+        <label for="location">Location</label>
+        <select 
+            class="form-control"
+            id="location" 
+            name="location"
+        >
+            <option value="">Select a location</option>
+        </select>
+
+        <label for="password1">Password</label>
+        <input 
+            type="password" 
+            class="form-control" 
+            id="password1" 
+            name="password1" 
+            placeholder="Enter password" 
+        />
+
+        <label for="password2">Password (Confirm)</label>
+        <input 
+            type="password" 
+            class="form-control" 
+            id="password2" 
+            name="password2" 
+            placeholder="Confirm password" 
+        />
+    </div>
+    <br />
+    <button
+        type="submit"
+        class="btn btn-primary">
+        Submit
+    </button>
+
+    <script>
+        // Array of UK cities
+        var cities = ['Aberdeen', 'Bath', 'Belfast', 'Birmingham', 'Brighton', 'Bristol', 'Cambridge', 'Canterbury', 
+        'Cardiff', 'Carlisle', 'Chester', 'Chichester', 'Coventry', 'Derby', 'Derry', 'Dundee', 'Durham', 'Edinburgh', 
+        'Exeter', 'Glasgow', 'Hereford', 'Inverness', 'Leeds', 'Leicester', 'Lichfield', 'Lincoln', 'Lisburn', 'Liverpool', 
+        'London', 'Londonderry', 'Manchester', 'Newcastle', 'Nottingham', 'Oxford', 'Peterborough', 'Plymouth', 'Portsmouth', 
+        'Reading', 'Salisbury', 'Sheffield', 'Southampton', 'St. Albans', 'St. Davids', 'Stirling', 'Swansea', 'Truro', 
+        'Wakefield', 'Wells', 'Winchester', 'Wolverhampton', 'Worcester', 'Worcester', 'York'];;
+    
+        // Loop through the cities array to generate options
+        var select = document.getElementById("location");
+        for (var i = 0; i < cities.length; i++) {
+            var option = document.createElement("option");
+            option.value = cities[i];
+            option.text = cities[i];
+            select.appendChild(option);
+        }
+    </script>
+
+    <div class="footer-logo">
+        <img src="images/logoforsep.jpg" alt="Footer Logo"> 
+    </div>
+</form>
+{% endblock %}
